@@ -1,0 +1,48 @@
+<%- include("template/nav", {tituloWeb: "Panel de Administración" }) %>
+
+  <div class="container">
+
+    <h1>CRUD MongoDB</h1>
+    <a class="btn btn-success btn-block my-4" href="/reserva/crear">Crear nueva reserva</a>
+
+    <!--Si existen elementos en el array de reserva-->
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Nombre</th>
+          <th scope="col">Tipo</th>
+          <th scope="col">Descripción</th>
+          <th scope="col">Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% if(arrayReserva.length> 0) { %>
+          <% arrayReserva.forEach(reserva=> { %>
+            <tr>
+              <th scope="row">
+                <%= reserva.id %>
+              </th>
+              <td>
+                <%= reserva.nombre %>
+              </td>
+              <td>
+                <%= reserva.tipo %>
+              </td>
+              <td>
+                <%= reserva.descripcion %>
+              </td>
+              <td>
+                <a class="btn btn-warning btn-sm" href="reserva/<%= reserva._id %>">Editar/Eliminar</a>
+              </td>
+            </tr>
+            <% }) %>
+              <% } %>
+      </tbody>
+
+
+    </table>
+  </div>
+
+
+  <%- include("template/footer") %>

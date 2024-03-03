@@ -1,0 +1,75 @@
+<%- include("template/nav", {tituloWeb: 'Detalles de la Reserva' }) %>
+<div class="container">
+    <h1>Detalles de la Reserva</h1>
+    <% if (error) { %>
+        <h2>
+            <%= mensaje %>
+        </h2>
+    <% } else { %>
+        <form id="editar" data-id="<%= reserva._id %>">
+            <input type="number" value="<%= reserva.id %>" class="form-control my-2" name="id" id="idInput">
+            <input type="text" value="<%= reserva.nombre %>" class="form-control my-2" name="nombre" id="nombreInput">
+            <input type="text" value="<%= reserva.tipo %>" class="form-control my-2" name="tipo" id="tipoInput">
+            <input type="text" value="<%= reserva.descripcion %>" class="form-control my-2" name="descripcion" id="descripcionInput">
+            <button class="btn btn-primary btn-sm" type="submit">Actualizar</button>
+        </form>
+        <hr>
+        <button class="btn btn-danger btn-sm" data-id="<%= reserva._id %>" id="eliminar">Eliminar</button>
+    <% } %>
+</div>
+<script>
+    const btnEliminar = document.getElementById('eliminar');
+    if (btnEliminar) {
+        btnEliminar.addEventListener('click', async () => {
+            const reservaId = btnEliminar.dataset.id;
+            try {
+                console.log(reservaId);
+
+                const response = await fetch(`/reserva/${reservaId}`, {
+                    method: 'DELETE'
+                });
+                const data = await response.json();
+                console.log(data);
+
+                if (data.estado) {
+                    window.location.href = '/reserva';
+                } else {
+                    console.log(data);
+                }
+            } catch (error) {
+                console.log(error);
+            }
+        });
+    }
+</script>
+
+<script>
+    const formEditar = document.querySelector('#editar');
+    formEditar.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        
+        const id = formEditar.elements['id'].value;
+        const nombre = formEditar.elements['nombre'].value;
+        const tipo = formEditar.elements['tipo'].value;
+        const descripcion = formEditar.elements['descripcion'].value;
+        const _id = formEditar.dataset.id;
+        
+        const data = await fetch(`/reserva/${_id}`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({id, nombre, tipo, descripcion })
+        });
+        
+        const res = await data.json();
+        
+        if (res.estado) {
+            window.location.href = '/reserva';
+        } else {
+            console.log(res);
+        }
+    })
+</script>
+    
+<%- include("template/footer") %>
