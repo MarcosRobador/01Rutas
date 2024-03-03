@@ -9,8 +9,8 @@
         <form id="editar" data-id="<%= reserva._id %>">
             <input type="number" value="<%= reserva.id %>" class="form-control my-2" name="id" id="idInput">
             <input type="text" value="<%= reserva.nombre %>" class="form-control my-2" name="nombre" id="nombreInput">
-            <input type="text" value="<%= reserva.tipo %>" class="form-control my-2" name="tipo" id="tipoInput">
-            <input type="text" value="<%= reserva.descripcion %>" class="form-control my-2" name="descripcion" id="descripcionInput">
+            <input type="date" value="<%= reserva.tipo %>" class="form-control my-2" name="tipo" id="tipoInput">
+            <input type="number" value="<%= reserva.descripcion %>" class="form-control my-2" name="descripcion" id="descripcionInput">
             <button class="btn btn-primary btn-sm" type="submit">Actualizar</button>
         </form>
         <hr>
