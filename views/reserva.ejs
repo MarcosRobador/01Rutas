@@ -1,28 +1,29 @@
 <%- include("template/nav", {tituloWeb: "Panel de Administración" }) %>
 
-  <div class="container">
+<div class="container my-5">
+  <h1 class="mb-4 text-center">Lista de Reservas</h1>
+  <div class="d-grid gap-2">
+    <a class="btn btn-success" href="/reserva/crear">
+      <i class="fas fa-plus"></i> Nueva Reserva
+  </a>
+    </div>
 
-    <h1>CRUD MongoDB</h1>
-    <a class="btn btn-success btn-block my-4" href="/reserva/crear">Crear nueva reserva</a>
-
-    <!--Si existen elementos en el array de reserva-->
-    <table class="table">
-      <thead>
+  <div class="table-responsive">
+    <table class="table text-center table-hover shadow-sm mt-4">
+      <thead class="table-dark">
         <tr>
           <th scope="col">#</th>
           <th scope="col">Nombre</th>
           <th scope="col">Fecha</th>
-          <th scope="col">Numero/Personas</th>
+          <th scope="col">Número de Personas</th>
           <th scope="col">Acciones</th>
         </tr>
       </thead>
       <tbody>
-        <% if(arrayReserva.length> 0) { %>
-          <% arrayReserva.forEach(reserva=> { %>
+        <% if(arrayReserva.length > 0) { %>
+          <% arrayReserva.forEach(reserva => { %>
             <tr>
-              <th scope="row">
-                <%= reserva.id %>
-              </th>
+              <th scope="row"><%= reserva.id %></th>
               <td>
                 <%= reserva.nombre %>
               </td>
@@ -36,13 +37,15 @@
                 <a class="btn btn-warning btn-sm" href="reserva/<%= reserva._id %>">Editar/Eliminar</a>
               </td>
             </tr>
-            <% }) %>
-              <% } %>
+          <% }) %>
+        <% } else { %>
+          <tr>
+            <td colspan="5" class="text-muted">No hay reservas para mostrar.</td>
+          </tr>
+        <% } %>
       </tbody>
-
-
     </table>
   </div>
+</div>
 
-
-  <%- include("template/footer") %>
+<%- include("template/footer") %>
