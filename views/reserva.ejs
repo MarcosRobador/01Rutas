@@ -35,9 +35,7 @@
                 <%= reserva.descripcion %>
               </td>
               <td>
-<!-- Dentro del bucle forEach para listar reservas -->
-<a class="btn btn-warning btn-sm editarReserva" data-bs-toggle="modal" data-bs-target="#modalEditarReserva" data-id="<%= reserva._id %>" data-nombre="<%= reserva.nombre %>" data-tipo="<%= reserva.tipo %>" data-descripcion="<%= reserva.descripcion %>">Editar</a>
-              </td>
+<a class="btn btn-warning btn-sm" href="reserva/<%= reserva._id %>">Editar/Eliminar</a>              </td>
             </tr>
           <% }) %>
         <% } else { %>
