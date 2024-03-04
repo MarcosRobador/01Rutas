@@ -3,9 +3,10 @@
 <div class="container my-5">
   <h1 class="mb-4 text-center">Lista de Reservas</h1>
   <div class="d-grid gap-2">
-    <a class="btn btn-success" href="/reserva/crear">
+    <a class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modalCrearReserva">
       <i class="fas fa-plus"></i> Nueva Reserva
-  </a>
+    </a>
+    
     </div>
 
   <div class="table-responsive">
@@ -34,7 +35,8 @@
                 <%= reserva.descripcion %>
               </td>
               <td>
-                <a class="btn btn-warning btn-sm" href="reserva/<%= reserva._id %>">Editar/Eliminar</a>
+<!-- Dentro del bucle forEach para listar reservas -->
+<a class="btn btn-warning btn-sm editarReserva" data-bs-toggle="modal" data-bs-target="#modalEditarReserva" data-id="<%= reserva._id %>" data-nombre="<%= reserva.nombre %>" data-tipo="<%= reserva.tipo %>" data-descripcion="<%= reserva.descripcion %>">Editar</a>
               </td>
             </tr>
           <% }) %>
@@ -48,4 +50,32 @@
   </div>
 </div>
 
+<!-- Modal para Nueva Reserva -->
+<div class="modal fade" id="modalCrearReserva" tabindex="-1" aria-labelledby="modalCrearReservaLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="modalCrearReservaLabel">Crear Nueva Reserva</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form id="formCrearReserva" method="POST">
+          <input type="number" placeholder="Número/Reserva" class="form-control my-2" name="id">
+          <input type="text" placeholder="Nombre" class="form-control my-2" name="nombre">
+          <input type="date" class="form-control my-2" name="tipo">
+          <input type="number" placeholder="Número de Personas" class="form-control my-2" name="descripcion">
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+        <button type="submit" form="formCrearReserva" class="btn btn-success">Agregar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
 <%- include("template/footer") %>
+
+
+  
